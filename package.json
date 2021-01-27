@@ -1,0 +1,29 @@
+{
+  "name": "coordtransform",
+  "version": "1.0.0",
+  "description": "坐标转换",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node ./test/*.test.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/feiquan123/coordtransform-js.git"
+  },
+  "keywords": [
+    "coord",
+    "transform"
+  ],
+  "author": "feiquan123",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/feiquan123/coordtransform-js/issues"
+  },
+  "homepage": "https://github.com/feiquan123/coordtransform-js#readme",
+  "dependencies": {
+    "minimist": "^1.2.5"
+  }
+}
