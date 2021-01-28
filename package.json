@@ -1,6 +1,6 @@
 {
   "name": "coordtransform-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "坐标转换",
   "main": "index.js",
   "directories": {
