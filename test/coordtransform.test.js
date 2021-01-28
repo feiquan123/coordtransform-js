@@ -3,7 +3,7 @@ require("..")
 // 坐标测试
 var lon = 114.363089,
 	lat = 30.517411;
-	
+
 // BD09toGCJ02: 百度坐标系->火星坐标系 
 console.log("BD09toGCJ02:", BD09toGCJ02(new Point(lon, lat)));
 // GCJ02toBD09: 火星坐标系->百度坐标系  

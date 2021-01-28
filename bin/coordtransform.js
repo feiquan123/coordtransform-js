@@ -13,7 +13,7 @@ node ./bin/coordtransform.js -t [type] [coords split by semicolon]
 Args:
 	-h 			help
 	-t 			transform type:
-		D09toGCJ02	百度坐标系 -> 火星坐标系
+		BD09toGCJ02	百度坐标系 -> 火星坐标系
 		GCJ02toBD09 	火星坐标系 -> 百度坐标系 	(默认)
 		WGS84toGCJ02 	WGS84坐标系 -> 火星坐标系
 		GCJ02toWGS84 	火星坐标系 -> WGS84坐标系
@@ -25,7 +25,11 @@ Args:
 		FromMercator 	墨卡托坐标系 -> 任意坐标系
 
 examples:
+	- 百度墨卡托坐标系 -> 百度坐标系
 	node bin/coordtransform.js  -t "DB09MctoBD09"  "12732754.092201,3549486.938401;12732775.608553,3549592.609005;"
+	
+	- 百度墨卡托坐标系 -> 百度坐标系 -> 火星坐标系
+	echo "12732754.092201,3549486.938401;12732775.608553,3549592.609005;" | node bin/coordtransform.js  -t "DB09MctoBD09" | node bin/coordtransform.js  -t "BD09toGCJ02" 
 `;
 
 var argv = require("minimist")(process.argv.slice(2));
@@ -36,8 +40,8 @@ if (argv.h) {
 
 var func = null;
 switch (argv.t) {
-  case "D09toGCJ02":
-    func = D09toGCJ02;
+  case "BD09toGCJ02":
+    func = BD09toGCJ02;
     break;
   case "GCJ02toBD09":
     func = GCJ02toBD09;
@@ -72,23 +76,15 @@ switch (argv.t) {
 
 function searchByPoint(c) {
   var d = c.split(",");
-  if (
-    d[0] &&
-    d[0].split(".")[0].length > 5 &&
-    d[1] &&
-    d[1].split(".")[0].length > 5
-  ) {
-    var f = func(new Point(d[0], d[1]));
-    d = [f.lng, f.lat];
-  } else {
-    d = [];
-  }
+  var f = func(new Point(d[0], d[1]));
+  d = [f.lng, f.lat];
   return d;
 }
 
 function searchByPoints(ss) {
   d = [];
   for (var l = ss.length, i = 0; i < l; i++) {
+    if (ss[i].length == 0) continue;
     d.push(searchByPoint(ss[i]).join(","));
   }
   return d;
@@ -106,7 +102,7 @@ if (arguments.length == 0) {
       process.stdin.emit("end");
     } else {
       t = searchByPoints(ss.split(";")).join(";");
-	  arr.push(t);
+      arr.push(t);
     }
   });
 

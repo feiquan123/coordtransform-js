@@ -6,12 +6,13 @@ var j = void 0, // undefined
 	o = !0, // true
 	p = null;
 
-// H 初始化坐标检查, 确保初始化时是 float,float
+// 初始化坐标检查, 确保初始化时是 float,float
+// 源函数 H
 function H(a, b) {
     a = isNaN(a) ? 0 : a;
     "string" == typeof a && (a = parseFloat(a));
     b = isNaN(b) ? 0 : b;
-    "string" == typeof a && (b = parseFloat(b));
+    "string" == typeof b && (b = parseFloat(b));
 	return {lng: a, lat: b};
 }
 
@@ -23,8 +24,9 @@ var dc = 3E3,
     ic = 0.0060;
 
 
-//GCJ02toBD09 火星坐标系->百度坐标系
-function qc(a) {
+// GCJ02toBD09 火星坐标系->百度坐标系
+// 源函数: qc
+function gcj02tobd09(a) {
     var b = a.lng,
         c = a.lat,
         a = Math.sqrt(b * b + c * c) + Math.sin(c * dc * gc) * ec,
@@ -36,7 +38,8 @@ function qc(a) {
 }
 
 // BD09toGCJ02: 百度坐标系->火星坐标系
-function Bc(a) {
+// 源函数: BC
+function bd09togcj02(a) {
 	var b = a.lng - hc,
 	c = a.lat - ic,
 	a = Math.sqrt(b * b + c * c) - Math.sin(c * dc * gc) * ec,
@@ -95,7 +98,8 @@ T = {
 };
 
 // DB09MctoBD09 百度墨卡托坐标系 - > 百度坐标系
-T.ub = function(a) {
+// 原函数: T.ub
+bd09mctobd09 = function(a) {
 	if (a === p || a === j)
 		return new H(0, 0);
 	var b, c;
@@ -110,7 +114,8 @@ T.ub = function(a) {
 }
 
 // BD09toBD09MC 百度坐标系-> 百度墨卡托坐标系
-T.tb = function(a) {
+// 源函数: T.tb
+bd09tobd09mc = function(a) {
 	if (a === p || a === j || 180 < a.lng || -180 > a.lng || 90 < a.lat || -90 > a.lat)
 		return new H(0, 0);
 	var b, c;
@@ -136,10 +141,6 @@ T.tb = function(a) {
 
 Point = H;
 defaultPoint = new Point(0, 0);
-bd09togcj02 = Bc;
-gcj02tobd09 = qc;
-bd09tobd09mc = T.tb;
-bd09mctobd09 = T.ub;
 
 var OFFSET = 0.00669342162296594323,
     AXIS = 6378245.0;
@@ -181,16 +182,14 @@ function delta(lon, lat) {
     dlat = (dlat * 180.0) / ((AXIS * (1 - OFFSET)) / (magic * sqrtmagic) * Math.PI)
     dlon = (dlon * 180.0) / (AXIS / sqrtmagic * Math.cos(radlat) * Math.PI)
 
-    mgLat = lat + dlat
-    mgLon = lon + dlon
-    return new Point(mgLon, mgLat)
+    return new Point(lon + dlon, lat + dlat)
 }
 
 function wgs84togcj02(a) {
     lng = a.lng, lat = a.lat;
     if (isOutOfChina(lng, lat)) {
         return defaultPoint;
-    }
+	}
     return delta(lng, lat);
 }
 
@@ -226,7 +225,6 @@ function bd09towgs84(a) {
 function wgs84tobd09(a) {
     return gcj02tobd09(wgs84togcj02(a))
 }
-
 
 // BD09toGCJ02 百度坐标系 - > 火星坐标系
 BD09toGCJ02 = bd09togcj02;
