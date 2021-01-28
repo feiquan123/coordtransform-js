@@ -1,6 +1,6 @@
 {
-  "name": "coordtransform—js",
-  "version": "1.0.0",
+  "name": "coordtransform_js",
+  "version": "1.0.1",
   "description": "坐标转换",
   "main": "index.js",
   "directories": {
@@ -25,5 +25,6 @@
   "homepage": "https://github.com/feiquan123/coordtransform-js#readme",
   "dependencies": {
     "minimist": "^1.2.5"
-  }
+  },
+  "private": false
 }
