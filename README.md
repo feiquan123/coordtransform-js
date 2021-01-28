@@ -54,7 +54,7 @@ FromMercator    墨卡托坐标系 -> 任意坐标系
 With [npm](https://npmjs.org) do:
 
 ```
-npm install coordtransform_js
+npm install coordtransform-js
 ```
 
 ## license

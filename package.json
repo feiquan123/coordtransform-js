@@ -1,5 +1,5 @@
 {
-  "name": "coordtransform_js",
+  "name": "coordtransform-js",
   "version": "1.0.1",
   "description": "坐标转换",
   "main": "index.js",
