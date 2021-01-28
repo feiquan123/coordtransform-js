@@ -13,6 +13,8 @@ This module provides coords transform function.
 	Mercator        普通墨卡托坐标系坐标系
 ```
 
+源码:[coordtransform-js](https://github.com/feiquan123/coordtransform-js)
+
 ## example
 
 ### js
@@ -58,3 +60,10 @@ npm install coordtransform
 ## license
 
 [MIT](https://choosealicense.com/licenses/mit/#)
+
+## refer
+
+百度源码:
+
+- [public.js](http://api.map.baidu.com/lbsapi/getpoint/Js/public.js?20200211)
+- [getscript 最新更新时间 20210126](https://api.map.baidu.com/getscript?v=2.0&ak=E4805d16520de693a3fe707cdc962045&services=&t=20210113094335)
